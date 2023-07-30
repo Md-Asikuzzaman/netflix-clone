@@ -1,12 +1,5 @@
 import React from 'react';
 
-{
-  /* <img
-  src='https://img.freepik.com/premium-photo/amazing-colorful-paper-craft-quilling-art-butterfly-design-background-ai-generated-image_848903-2755.jpg?w=740'
-  alt='butterfly'
-/>; */
-}
-
 const Home = () => {
   return (
     <div className='flex items-center justify-center min-h-screen bg-indigo-100'>
