@@ -1,8 +1,13 @@
 'use client';
 
-import Input from '@/components/input';
 import { NextPage } from 'next';
 import { useCallback, useState } from 'react';
+import axios from 'axios';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+
+import Input from '@/components/input';
+
 interface Props {}
 
 const Auth: NextPage<Props> = ({}) => {
@@ -12,11 +17,42 @@ const Auth: NextPage<Props> = ({}) => {
 
   const [variant, setVariant] = useState('login');
 
+  const router = useRouter();
+
   const toggleVariant = useCallback(() => {
     setVariant((currentVariant) =>
       currentVariant === 'login' ? 'register' : 'login'
     );
   }, []);
+
+  const login = useCallback(async () => {
+    try {
+      await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+        callbackUrl: '/',
+      });
+
+      router.push('/');
+    } catch (error) {
+      console.log(error);
+    }
+  }, [email, password]);
+
+  const register = useCallback(async () => {
+    try {
+      await axios.post('http://localhost:3000/api/register', {
+        email,
+        name,
+        password,
+      });
+
+      login();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [name, email, password]);
 
   return (
     <div className="relative h-screen w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-cover bg-fixed">
@@ -54,11 +90,16 @@ const Auth: NextPage<Props> = ({}) => {
                 onChange={(e: any) => setPassword(e.target.value)}
               />
             </div>
-            <button className='bg-red-600 text-white w-full py-3 text-md rounded-md mt-10 hover:bg-red-700 transition'>
+            <button
+              onClick={variant === 'login' ? login : register}
+              className='bg-red-600 text-white w-full py-3 text-md rounded-md mt-10 hover:bg-red-700 transition'
+            >
               {variant === 'login' ? 'Login' : 'Sign up'}
             </button>
             <p className='text-neutral-400 mt-12'>
-              {variant === 'login' ? 'First time using Netflix?' : 'Already have an account?'}
+              {variant === 'login'
+                ? 'First time using Netflix?'
+                : 'Already have an account?'}
               <span
                 onClick={toggleVariant}
                 className='text-white ml-1 hover:underline cursor-pointer'

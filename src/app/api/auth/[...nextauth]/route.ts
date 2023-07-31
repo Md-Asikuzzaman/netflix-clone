@@ -1,12 +1,13 @@
-import NextAuth from 'next-auth/next';
-import Credentials from 'next-auth/providers/credentials';
+import NextAuth from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
 import { compare } from 'bcrypt';
 
-import prisma_db from '@/lib/prismadb';
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
-export default NextAuth({
+const handler = NextAuth({
   providers: [
-    Credentials({
+    CredentialsProvider({
       id: 'credentials',
       name: 'Credentials',
       credentials: {
@@ -25,7 +26,7 @@ export default NextAuth({
           throw new Error('Email and Password required!');
         }
 
-        const user = await prisma_db.user.findUnique({
+        const user = await prisma.user.findUnique({
           where: {
             email: credentials.email,
           },
@@ -61,3 +62,5 @@ export default NextAuth({
   },
   secret: process.env.NEXT_AUTH_SECRET,
 });
+
+export { handler as GET, handler as POST };
