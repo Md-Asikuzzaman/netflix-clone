@@ -6,6 +6,9 @@ import axios from 'axios';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
+import { FcGoogle } from 'react-icons/fc';
+import { FaGithub } from 'react-icons/fa';
+
 import Input from '@/components/input';
 
 interface Props {}
@@ -52,7 +55,7 @@ const Auth: NextPage<Props> = ({}) => {
     } catch (error) {
       console.log(error);
     }
-  }, [name, email, password]);
+  }, [name, email, password, login]);
 
   return (
     <div className="relative h-screen w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-cover bg-fixed">
@@ -96,6 +99,15 @@ const Auth: NextPage<Props> = ({}) => {
             >
               {variant === 'login' ? 'Login' : 'Sign up'}
             </button>
+            <div className='flex items-center gap-4 mt-8 justify-center'>
+              <div className='w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition'>
+                <FcGoogle size={30} />
+              </div>
+
+              <div className='w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition'>
+                <FaGithub size={30} />
+              </div>
+            </div>
             <p className='text-neutral-400 mt-12'>
               {variant === 'login'
                 ? 'First time using Netflix?'
