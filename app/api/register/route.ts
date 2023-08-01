@@ -42,7 +42,5 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   const user = await prisma.user.findMany();
-  //   const user = 'asik';
-
   return NextResponse.json(user, { status: 200 });
 }

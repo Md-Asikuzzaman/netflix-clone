@@ -5,8 +5,8 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import GitHubProvider from 'next-auth/providers/github';
 
-import { compare } from 'bcrypt';
 import { prisma } from '@/lib/prisma';
+import axios from 'axios';
 
 const handler = NextAuth({
   providers: [
@@ -38,33 +38,37 @@ const handler = NextAuth({
           throw new Error('Email and Password required!');
         }
 
-        const user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
+        const res = await axios.post('http://localhost:3000/api/login', {
+          email: credentials.email,
+          password: credentials.password,
         });
 
-        if (!user || !user.hashPassword) {
-          throw new Error('Email does not exist!');
+        const user = await res.data;
+
+        if (user) {
+          return user;
+        } else {
+          return null;
         }
-
-        const isCorrectPassword = await compare(
-          credentials.password,
-          user.hashPassword
-        );
-
-        if (!isCorrectPassword) {
-          throw new Error('Incorrect Password!');
-        }
-
-        return user;
       },
     }),
   ],
 
+  callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user };
+    },
+
+    async session({ session, token }) {
+      session.user = token as any;
+      return session;
+    },
+  },
+
   pages: {
     signIn: '/auth/signin',
     signOut: '/auth/signin',
+    error: '/auth/signin',
   },
   debug: process.env.NODE_ENV === 'production',
   adapter: PrismaAdapter(prisma),
