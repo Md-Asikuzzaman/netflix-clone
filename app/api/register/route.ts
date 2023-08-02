@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
 import { prisma } from '@/lib/prisma';
+// check session existing...
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 // Crate a New Post
 export async function POST(request: Request) {
@@ -31,8 +34,7 @@ export async function POST(request: Request) {
       },
     });
 
-
-    const { hashPassword , ...result} = user;
+    const { hashPassword, ...result } = user;
 
     return NextResponse.json(result, { status: 201 });
   } catch (error) {
@@ -41,6 +43,12 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json('Unauthenticated!!!', { status: 500 });
+  }
+
   const user = await prisma.user.findMany();
   return NextResponse.json(user, { status: 200 });
 }
