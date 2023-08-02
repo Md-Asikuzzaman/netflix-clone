@@ -42,13 +42,3 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET(request: Request) {
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
-    return NextResponse.json('Unauthenticated!!!', { status: 500 });
-  }
-
-  const user = await prisma.user.findMany();
-  return NextResponse.json(user, { status: 200 });
-}
