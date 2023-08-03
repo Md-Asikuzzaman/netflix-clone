@@ -18,13 +18,13 @@ const Billboard: NextPage<Props> = ({}) => {
   }
 
   return (
-    <div className='relative h-[56.25vw] overflow-hidden'>
-      <div className='h-[70.25vh] w-[100vw] absolute top-0 left-0 overflow-hidden bg-zinc-900'>
+    <div className='relative h-[200px] md:h-[380px] lg:h-[500px] overflow-hidden'>
+      <div className='h-[200px] md:h-[380px] lg:h-[500px] w-[100vw] absolute top-0 left-0 overflow-hidden bg-zinc-900'>
         {/* {data && (
           <ReactPlayer
             style={{ opacity: 0.3 }}
             width='100vw'
-            height='56.25vw'
+            height='100%'
             loop
             playing
             muted={true}
@@ -32,7 +32,13 @@ const Billboard: NextPage<Props> = ({}) => {
           />
         )} */}
 
-        <img className='opacity-60 bg-cover bg-center' height="56.25vh" width="100%" src={data && data[0]?.thumbnailUrl} alt='thumbnail' />
+        <img
+          className='opacity-60 bg-cover bg-center'
+          height='700px'
+          width='100%'
+          src={data && data[0]?.thumbnailUrl}
+          alt='thumbnail'
+        />
       </div>
 
       <div className='absolute top-[30%] md:top-[20%] ml-4 md:ml-16'>
