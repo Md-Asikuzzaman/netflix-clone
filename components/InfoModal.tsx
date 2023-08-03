@@ -36,7 +36,7 @@ const InfoModal: NextPage<Props> = ({ visible, onClose }) => {
 
   return (
     <div className='z-40 transition duration bg-black bg-opacity-80 flex justify-end items-center overflow-x-hidden overflow-y-auto fixed inset-0'>
-      <div className='relative w-auto mx-auto max-w-3xl rounded-md overflow-hidden'>
+      <div className='relative w-full mx-auto max-w-3xl rounded-md overflow-hidden'>
         <div
           className={`${
             isVisible ? 'scale-100' : 'scale-0'

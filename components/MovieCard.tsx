@@ -1,7 +1,10 @@
 import { NextPage } from 'next';
-import { BsFillPlayFill } from 'react-icons/bs';
-import FavoriteButton from './FavoriteButton';
 import { useRouter } from 'next/navigation';
+import { BsFillPlayFill } from 'react-icons/bs';
+import { BiSolidChevronDown } from 'react-icons/bi';
+
+import FavoriteButton from './FavoriteButton';
+import useInfoModal from '@/hooks/useInfoModal';
 
 interface Props {
   data: MovieDataType;
@@ -9,6 +12,7 @@ interface Props {
 
 const MovieCard: NextPage<Props> = ({ data }) => {
   const router = useRouter();
+  const { openModal } = useInfoModal();
 
   return (
     <div className='group bg-zinc-900 col-span-1 relative h-[12vw]'>
@@ -37,6 +41,9 @@ const MovieCard: NextPage<Props> = ({ data }) => {
               />
             </div>
             <FavoriteButton movieId={data.id} />
+            <div onClick={() => openModal(data?.id)} className='cursor-pointer ml-auto group/item w-6 h-6 lg:w-10 lg:h-10 border-white border-2 rounded-full flex justify-center items-center transition hover:bg-neutral-300'>
+              <BiSolidChevronDown className="text-white group-hover/item:text-neutral-900" size={22}/>
+            </div>
           </div>
 
           <p className='text-green-400 font-semibold mt-4'>
