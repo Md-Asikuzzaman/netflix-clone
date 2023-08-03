@@ -4,14 +4,14 @@ import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
-  const session = await getServerSession(authOptions);
-
-  // console.log(session);
-
-  if (!session) {
-    return NextResponse.json('Unauthenticated!!!', { status: 500 });
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json('Unauthenticated!!!', { status: 500 });
+    }
+    const movies = await prisma.movie.findMany();
+    return NextResponse.json(movies, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(error, { status: 500 });
   }
-
-  const movies = await prisma.movie.findMany();
-  return NextResponse.json(movies, { status: 200 });
 }
