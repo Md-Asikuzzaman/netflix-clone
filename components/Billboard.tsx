@@ -5,33 +5,24 @@ import { NextPage } from 'next';
 import ReactPlayer from 'react-player';
 
 import { AiOutlineInfoCircle } from 'react-icons/ai';
+import PlayButton from './PlayButton';
+import { useCallback } from 'react';
+import useInfoModal from '@/hooks/useInfoModal';
 
 interface Props {}
 
 const Billboard: NextPage<Props> = ({}) => {
   const { data, isLoading } = useBillboard();
 
-  console.log(data);
+  const { openModal } = useInfoModal();
 
-  if (data) {
-    console.log(data[0]?.videoUrl);
-  }
+  const handleOpenModal = useCallback(() => {
+    openModal(!isLoading && data[0]?.id);
+  }, [data]);
 
   return (
     <div className='relative h-[200px] md:h-[380px] lg:h-[500px] overflow-hidden'>
       <div className='h-[200px] md:h-[380px] lg:h-[500px] w-[100vw] absolute top-0 left-0 overflow-hidden bg-zinc-900'>
-        {/* {data && (
-          <ReactPlayer
-            style={{ opacity: 0.3 }}
-            width='100vw'
-            height='100%'
-            loop
-            playing
-            muted={true}
-            url={data[0]?.videoUrl}
-          />
-        )} */}
-
         <img
           className='opacity-60 bg-cover bg-center'
           height='700px'
@@ -50,7 +41,11 @@ const Billboard: NextPage<Props> = ({}) => {
           {data ? data[0]?.description : 'loading...'}
         </p>
         <div className='flex flex-row items-center mt-3 md:mt-4 gap-3'>
-          <button className='bg-white text-white bg-opacity-30 rounded-md py-1 md:py-2 px-2 md:px-4 w-auto text-xs lg:text-lg font-semibold flex flex-row gap-1 items-center hover:bg-opacity-20 transition'>
+          <PlayButton movieId={data && data[0]?.id} />
+          <button
+            onClick={handleOpenModal}
+            className='bg-white text-white bg-opacity-30 rounded-md py-1 md:py-2 px-2 md:px-4 w-auto text-xs lg:text-lg font-semibold flex flex-row gap-1 items-center hover:bg-opacity-20 transition'
+          >
             <AiOutlineInfoCircle />
             More Info
           </button>

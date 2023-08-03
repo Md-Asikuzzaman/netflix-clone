@@ -30,7 +30,5 @@ export async function POST(request: Request) {
       accessToken,
     };
 
-  console.log(result);
-
   return new Response(JSON.stringify(result));
 }

@@ -15,8 +15,6 @@ const Navbar: NextPage<Props> = ({}) => {
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
 
-  console.log(showBackground);
-
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= TOP_OFFSET) {
