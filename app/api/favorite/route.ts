@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { without } from 'lodash';
+import _ from 'lodash';
 
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -53,7 +53,7 @@ export async function DELETE(request: Request) {
       return NextResponse.json('Invalid movie ID!', { status: 500 });
     }
 
-    const updatedFavoriteIds = without(session.user.favoriteIds, movieId);
+    const updatedFavoriteIds = _.without(session.user.favoriteIds, movieId);
 
     const updateUser = await prisma.user.update({
       where: {

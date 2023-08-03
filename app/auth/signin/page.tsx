@@ -27,6 +27,9 @@ const Auth: NextPage<Props> = ({}) => {
 
   const login = useCallback(async () => {
     try {
+      setEmail('');
+      setPassword('');
+
       await signIn('credentials', {
         email,
         password,
@@ -39,6 +42,10 @@ const Auth: NextPage<Props> = ({}) => {
 
   const register = useCallback(async () => {
     try {
+      setName('');
+      setEmail('');
+      setPassword('');
+
       await axios.post('http://localhost:3000/api/register', {
         email,
         name,
@@ -60,7 +67,7 @@ const Auth: NextPage<Props> = ({}) => {
         <div className='flex justify-center'>
           <div className='bg-black bg-opacity-70 self-center px-16 py-16 mt-2 lg:w-2/5 lg:max-w-lg rounded-md w-full'>
             <h2 className='text-white text-4xl mb-8 font-semibold'>
-              {variant === 'login' ? 'Sign in' : 'Register'}
+              {variant === 'login' ? 'Sign in' : 'Sign up'}
             </h2>
             <div className='flex flex-col gap-4'>
               {variant === 'register' && (
@@ -91,7 +98,7 @@ const Auth: NextPage<Props> = ({}) => {
               onClick={variant === 'login' ? login : register}
               className='bg-red-600 text-white w-full py-3 text-md rounded-md mt-10 hover:bg-red-700 transition'
             >
-              {variant === 'login' ? 'Login' : 'Sign up'}
+              {variant === 'login' ? 'Login' : 'Register'}
             </button>
             <div className='flex items-center gap-4 mt-8 justify-center'>
               <div

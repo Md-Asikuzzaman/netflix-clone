@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import MovieCard from './MovieCard';
+import _ from 'lodash';
 
 interface Props {
   data: MovieDataType[];
@@ -7,7 +8,7 @@ interface Props {
 }
 
 const MovieList: NextPage<Props> = ({ data, title }) => {
-  if (!data) {
+  if (_.isEmpty(data)) {
     return null;
   }
 
