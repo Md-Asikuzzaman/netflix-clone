@@ -1,12 +1,14 @@
 'use client';
 
-import useMovie from '@/hooks/useMovie';
+import { useEffect } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
-import ReactPlayer from 'react-player';
 
+import ReactPlayer from 'react-player';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { ImSpinner9 } from 'react-icons/im';
+
+import useMovie from '@/hooks/useMovie';
 interface Props {
   params: { movieId: string };
 }
@@ -33,7 +35,11 @@ const Watch: NextPage<Props> = ({ params }) => {
         <p className='text-white text-xl md:text-3xl font-bold'>
           Watching:
           <span className='font-light ml-2'>
-            {!isLoading ? data?.title : 'Loading...'}
+            {!isLoading ? (
+              data?.title
+            ) : (
+              <ImSpinner9 className='inline-flex animate-spin' />
+            )}
           </span>
         </p>
       </nav>

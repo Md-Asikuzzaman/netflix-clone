@@ -1,9 +1,12 @@
-import useInfoModal from '@/hooks/useInfoModal';
-import useMovie from '@/hooks/useMovie';
-import { NextPage } from 'next';
 import { useCallback, useEffect, useState } from 'react';
+import { NextPage } from 'next';
+
 import { AiOutlineClose } from 'react-icons/ai';
 import ReactPlayer from 'react-player';
+
+import useInfoModal from '@/hooks/useInfoModal';
+import useMovie from '@/hooks/useMovie';
+
 import PlayButton from './PlayButton';
 import FavoriteButton from './FavoriteButton';
 

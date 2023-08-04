@@ -1,9 +1,10 @@
+import { useCallback, useEffect, useState } from 'react';
 import { NextPage } from 'next';
-import NavbarItem from './NavbarItem';
 
 import { BsBell, BsChevronDown, BsSearch } from 'react-icons/bs';
+
+import NavbarItem from './NavbarItem';
 import MobileMenu from './MobileMenu';
-import { useCallback, useEffect, useState } from 'react';
 import AccountMenu from './AccountMenu';
 
 const TOP_OFFSET = 66;

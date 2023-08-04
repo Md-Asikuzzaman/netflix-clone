@@ -2,8 +2,8 @@
 
 import { NextPage } from 'next';
 import { useCallback, useState } from 'react';
-import axios from 'axios';
 import { signIn } from 'next-auth/react';
+import axios from 'axios';
 
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';

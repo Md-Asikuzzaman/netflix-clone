@@ -7,8 +7,6 @@ import { AiOutlineInfoCircle } from 'react-icons/ai';
 import PlayButton from './PlayButton';
 import { useCallback } from 'react';
 import useInfoModal from '@/hooks/useInfoModal';
-import { ImSpinner9 } from 'react-icons/im';
-
 interface Props {}
 
 const Billboard: NextPage<Props> = ({}) => {

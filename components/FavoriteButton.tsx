@@ -1,12 +1,12 @@
 'use client';
 
-import { NextPage } from 'next';
-import { AiOutlineCheck, AiOutlinePlus } from 'react-icons/ai';
-import { useSession } from 'next-auth/react';
-
-import useFavorite from '@/hooks/useFavorite';
 import { useCallback, useMemo } from 'react';
+import { NextPage } from 'next';
+import { useSession } from 'next-auth/react';
 import axios from 'axios';
+
+import { AiOutlineCheck, AiOutlinePlus } from 'react-icons/ai';
+import useFavorite from '@/hooks/useFavorite';
 interface Props {
   movieId: string;
 }

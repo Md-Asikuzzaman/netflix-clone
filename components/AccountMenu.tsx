@@ -1,8 +1,8 @@
 'use client';
 
 import { NextPage } from 'next';
-import { signOut } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 
 interface Props {
   visible?: boolean;

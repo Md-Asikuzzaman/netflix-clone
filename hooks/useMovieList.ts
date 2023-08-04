@@ -3,7 +3,7 @@ import useSWR from 'swr';
 
 interface HooksType {
   data: MovieDataType[];
-  isLoading: string | boolean;
+  isLoading: boolean;
   error: string;
 }
 

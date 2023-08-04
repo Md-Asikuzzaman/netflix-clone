@@ -1,6 +1,7 @@
 'use client';
-
 import React from 'react';
+import _ from 'lodash';
+
 import Navbar from '@/components/Navbar';
 import Billboard from '@/components/Billboard';
 import MovieList from '@/components/MovieList';
@@ -10,7 +11,7 @@ import InfoModal from '@/components/InfoModal';
 import useInfoModal from '@/hooks/useInfoModal';
 
 const Home = () => {
-  const { data: movies = [] } = useMovieList();
+  const { data: movies = [], isLoading } = useMovieList();
   const { data: favorites = [] } = useFavorite();
 
   const { isOpen, closeModal } = useInfoModal();
@@ -21,8 +22,11 @@ const Home = () => {
       <Navbar />
       <Billboard />
       <div className='pb-40'>
-        <MovieList data={movies} title='Trending Now' />
-        <MovieList data={favorites} title='My List' />
+        <MovieList data={movies} isLoading={isLoading} title='Trending Now' />
+
+        {!_.isEmpty(favorites) && (
+          <MovieList data={favorites} isLoading={isLoading} title='My List' />
+        )}
       </div>
     </>
   );
