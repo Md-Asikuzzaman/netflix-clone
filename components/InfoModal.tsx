@@ -45,16 +45,16 @@ const InfoModal: NextPage<Props> = ({ visible, onClose }) => {
             isVisible ? 'scale-100' : 'scale-0'
           } transform duration-300 relative flex-auto bg-zinc-900 drop-shadow-md z-50`}
         >
-          <div className='relative h-80'>
+          <div className='relative h-80 overflow-hidden'>
             {data && (
               <ReactPlayer
-                width='100%'
-                height='100%'
+                height={'100%'}
+                width={'100%'}
                 loop
                 playing
                 muted
                 className='opacity-30'
-                url={!isLoading ? data?.videoUrl : ''}
+                url={data?.videoUrl}
               />
             )}
 

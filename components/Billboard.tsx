@@ -25,9 +25,7 @@ const Billboard: NextPage<Props> = ({}) => {
           <div className='h-[700px] w-full bg-zinc-800'></div>
         ) : (
           <img
-            className='opacity-60 bg-cover bg-center'
-            height='700px'
-            width='100%'
+            className='opacity-60 object-cover w-full h-full'
             src={data?.thumbnailUrl}
             alt='thumbnail'
           />
