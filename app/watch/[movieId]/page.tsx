@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/navigation';
 
@@ -14,6 +14,9 @@ interface Props {
 }
 
 const Watch: NextPage<Props> = ({ params }) => {
+  const [isHover, setIsHover] = useState(true);
+
+  // console.log(fadeNavBar);
   const { movieId } = params;
   const router = useRouter();
   const { data, isLoading, error } = useMovie(movieId ? movieId : '');
@@ -26,7 +29,13 @@ const Watch: NextPage<Props> = ({ params }) => {
 
   return (
     <div className='h-screen w-screen bg-black'>
-      <nav className='fixed w-full p-4 z-10 flex flex-row items-center gap-8 bg-black bg-opacity-70'>
+      <nav
+        onMouseOver={() => setIsHover(true)}
+        onMouseOut={() => setIsHover(false)}
+        className={`fixed w-full p-4 z-10 flex flex-row items-center gap-8 bg-black bg-opacity-70  duration-700 cursor-pointer ${
+          isHover ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
         <AiOutlineArrowLeft
           onClick={() => router.replace('/')}
           className='text-white cursor-pointer'
