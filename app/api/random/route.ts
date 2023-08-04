@@ -19,7 +19,7 @@ export async function GET(request: Request) {
       skip: randomIndex,
     });
 
-    return NextResponse.json(randomMovie, { status: 200 });
+    return NextResponse.json(randomMovie[0], { status: 200 });
   } catch (error) {
     return NextResponse.json(error, { status: 400 });
   }

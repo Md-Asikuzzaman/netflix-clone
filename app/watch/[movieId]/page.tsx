@@ -3,6 +3,7 @@
 import useMovie from '@/hooks/useMovie';
 import { NextPage } from 'next';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import ReactPlayer from 'react-player';
 
@@ -15,9 +16,11 @@ const Watch: NextPage<Props> = ({ params }) => {
   const router = useRouter();
   const { data, isLoading, error } = useMovie(movieId ? movieId : '');
 
-  if (error) {
-    router.replace('/');
-  }
+  useEffect(() => {
+    if (error) {
+      router.replace('/');
+    }
+  }, [error]);
 
   return (
     <div className='h-screen w-screen bg-black'>

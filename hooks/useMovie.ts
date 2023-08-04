@@ -1,18 +1,8 @@
 import useSWR from 'swr';
 import fetcher from '@/lib/fetcher';
 
-interface MovieType {
-  id: string;
-  title: string;
-  description: string;
-  videoUrl: string;
-  thumbnailUrl: string;
-  genre: string;
-  duration: string;
-}
-
 interface HooksType {
-  data: MovieType;
+  data: MovieDataType;
   isLoading: string | boolean;
   error: string;
 }

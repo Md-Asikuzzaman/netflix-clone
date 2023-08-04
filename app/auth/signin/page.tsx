@@ -33,7 +33,7 @@ const Auth: NextPage<Props> = ({}) => {
       await signIn('credentials', {
         email,
         password,
-        callbackUrl: '/',
+        callbackUrl: '/profile',
       });
     } catch (error) {
       console.log(error);
@@ -104,7 +104,7 @@ const Auth: NextPage<Props> = ({}) => {
               <div
                 onClick={() =>
                   signIn('google', {
-                    callbackUrl: '/',
+                    callbackUrl: '/profile',
                   })
                 }
                 className='w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition'
@@ -115,7 +115,7 @@ const Auth: NextPage<Props> = ({}) => {
               <div
                 onClick={() =>
                   signIn('github', {
-                    callbackUrl: '/',
+                    callbackUrl: '/profile',
                   })
                 }
                 className='w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition'
