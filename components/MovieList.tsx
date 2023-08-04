@@ -15,12 +15,12 @@ const MovieList: NextPage<Props> = ({ data, title, isLoading }) => {
         <p className='text-white text-md md:text-xl lg:text-2xl font-semibold mb-4'>
           {title}
         </p>
-        <div className='grid grid-cols-4 gap-2'>
+        <div className='grid grid-cols-2 md:grid-cols-4 gap-2'>
           {isLoading
             ? Array.from({ length: 4 }, (_, i) => i + 1).map((d) => (
                 <div
                   key={d}
-                  className='w-full h-[12vw] bg-neutral-800 rounded-md shadow-xl'
+                  className='w-full h-[100px] md:h-[12vw] bg-neutral-800 rounded-md shadow-xl'
                 ></div>
               ))
             : data.map((movie) => <MovieCard key={movie.id} data={movie} />)}

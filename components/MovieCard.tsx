@@ -17,9 +17,10 @@ const MovieCard: NextPage<Props> = ({ data }) => {
   const { openModal } = useInfoModal();
 
   return (
-    <div className='group bg-zinc-900 col-span-1 relative h-[12vw]'>
+    <div className='group bg-zinc-900 col-span-1 relative md:h-[12vw]'>
       <img
-        className='cursor-pointer object-cover transition duration-100 shadow-xl rounded-md group-hover:opacity-90 sm:group-hover:opacity-0 delay-300 w-full h-[12vw]'
+        onClick={() => openModal(data?.id)}
+        className='cursor-pointer object-cover transition duration-100 shadow-xl rounded-md group-hover:opacity-90 sm:group-hover:opacity-0 delay-300 w-full h-[100px] md:h-[12vw]'
         src={data.thumbnailUrl}
         alt='thumbnail'
       />
