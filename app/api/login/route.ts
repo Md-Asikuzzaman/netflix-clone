@@ -1,6 +1,6 @@
 import { signJwtAccessToken } from '@/lib/jwt';
 import { PrismaClient } from '@prisma/client';
-export const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 import { compare } from 'bcrypt';
 
 export async function POST(request: Request) {

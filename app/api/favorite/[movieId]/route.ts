@@ -5,7 +5,7 @@ import _ from 'lodash';
 import { authOptions } from '@/lib/auth';
 
 import { PrismaClient } from '@prisma/client';
-export const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
 export async function POST(
   request: NextRequest,
@@ -42,38 +42,38 @@ export async function POST(
   }
 }
 
-// export async function DELETE(
-//   request: NextRequest,
-//   { params }: { params: { movieId: string } }
-// ) {
-//   const { movieId } = params;
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { movieId: string } }
+) {
+  const { movieId } = params;
 
-//   try {
-//     const session = await getServerSession(authOptions);
-//     if (!session) {
-//       return NextResponse.json('Unauthenticated!!!', { status: 500 });
-//     }
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json('Unauthenticated!!!', { status: 500 });
+    }
 
-//     const existingMovie = await prisma.movie.findUnique({
-//       where: { id: movieId },
-//     });
-//     if (!existingMovie) {
-//       return NextResponse.json('Invalid movie ID!', { status: 500 });
-//     }
+    const existingMovie = await prisma.movie.findUnique({
+      where: { id: movieId },
+    });
+    if (!existingMovie) {
+      return NextResponse.json('Invalid movie ID!', { status: 500 });
+    }
 
-//     const updatedFavoriteIds = _.without(session.user.favoriteIds, movieId);
+    const updatedFavoriteIds = _.without(session.user.favoriteIds, movieId);
 
-//     const updateUser = await prisma.user.update({
-//       where: {
-//         email: session.user.email,
-//       },
-//       data: {
-//         favoriteIds: updatedFavoriteIds,
-//       },
-//     });
+    const updateUser = await prisma.user.update({
+      where: {
+        email: session.user.email,
+      },
+      data: {
+        favoriteIds: updatedFavoriteIds,
+      },
+    });
 
-//     return NextResponse.json(updateUser, { status: 200 });
-//   } catch (error) {
-//     return NextResponse.json(error, { status: 500 });
-//   }
-// }
+    return NextResponse.json(updateUser, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(error, { status: 500 });
+  }
+}
