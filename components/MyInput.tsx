@@ -7,7 +7,7 @@ interface Props {
   data: any;
 }
 
-const Input: NextPage<Props> = ({ id, label, type, data }) => {
+const MyInput: NextPage<Props> = ({ id, label, type, data }) => {
   return (
     <div className='relative'>
       <input
@@ -47,4 +47,4 @@ const Input: NextPage<Props> = ({ id, label, type, data }) => {
   );
 };
 
-export default Input;
+export default MyInput;

@@ -8,7 +8,7 @@ import axios from 'axios';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
 
-import Input from './../../../components/Input';
+import MyInput from '@/components/MyInput';
 
 interface Props {}
 
@@ -111,7 +111,7 @@ const Auth: NextPage<Props> = ({}) => {
                 className='flex flex-col gap-6'
               >
                 <div className='relative'>
-                  <Input
+                  <MyInput
                     id='name'
                     label='Username'
                     type='string'
@@ -126,7 +126,7 @@ const Auth: NextPage<Props> = ({}) => {
                 </div>
 
                 <div className='relative'>
-                  <Input
+                  <MyInput
                     id='email'
                     label='Email'
                     type='string'
@@ -141,7 +141,7 @@ const Auth: NextPage<Props> = ({}) => {
                 </div>
 
                 <div className='relative'>
-                  <Input
+                  <MyInput
                     id='password'
                     label='Password'
                     type='password'
@@ -167,7 +167,7 @@ const Auth: NextPage<Props> = ({}) => {
                 className='flex flex-col gap-6'
               >
                 <div className='relative'>
-                  <Input
+                  <MyInput
                     id='email'
                     label='Email'
                     type='string'
@@ -180,7 +180,7 @@ const Auth: NextPage<Props> = ({}) => {
                   )}
                 </div>
                 <div className='relative'>
-                  <Input
+                  <MyInput
                     id='password'
                     label='Password'
                     type='password'
