@@ -45,10 +45,6 @@ const Auth: NextPage<Props> = ({}) => {
   });
 
   // form validation end....
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
   const [variant, setVariant] = useState('login');
 
   const toggleVariant = useCallback(() => {
@@ -57,41 +53,35 @@ const Auth: NextPage<Props> = ({}) => {
     );
   }, []);
 
-  const handleLogin = useCallback(
-    async (data: signInFormData) => {
-      try {
-        const { email, password } = data;
+  const handleLogin = useCallback(async (data: signInFormData) => {
+    try {
+      const { email, password } = data;
 
-        await signIn('credentials', {
-          email,
-          password,
-          callbackUrl: '/profile',
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    [email, password]
-  );
+      await signIn('credentials', {
+        email,
+        password,
+        callbackUrl: '/profile',
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
-  const handleRegister = useCallback(
-    async (data: signUpFormData) => {
-      try {
-        const { name, email, password } = data;
+  const handleRegister = useCallback(async (data: signUpFormData) => {
+    try {
+      const { name, email, password } = data;
 
-        await axios.post('http://localhost:3000/api/register', {
-          email,
-          name,
-          password,
-        });
+      await axios.post('http://localhost:3000/api/register', {
+        email,
+        name,
+        password,
+      });
 
-        handleLogin(data);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    [name, email, password]
-  );
+      handleLogin(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   const submitSignUpData = (data: signUpFormData) => {
     handleRegister(data);
@@ -129,7 +119,7 @@ const Auth: NextPage<Props> = ({}) => {
                   />
 
                   {registerErrors.name && (
-                    <span className='text-white text-sm absolute -bottom-[18px] left-0'>
+                    <span className='text-red-500 text-sm absolute -bottom-[18px] left-0'>
                       {registerErrors.name.message}
                     </span>
                   )}
@@ -144,7 +134,7 @@ const Auth: NextPage<Props> = ({}) => {
                   />
 
                   {registerErrors.email && (
-                    <span className='text-white text-sm absolute -bottom-[18px] left-0'>
+                    <span className='text-red-500 text-sm absolute -bottom-[18px] left-0'>
                       {registerErrors.email.message}
                     </span>
                   )}
@@ -159,7 +149,7 @@ const Auth: NextPage<Props> = ({}) => {
                   />
 
                   {registerErrors.password && (
-                    <span className='text-white text-sm absolute -bottom-[18px] left-0'>
+                    <span className='text-red-500 text-sm absolute -bottom-[18px] left-0'>
                       {registerErrors.password.message}
                     </span>
                   )}
@@ -184,7 +174,7 @@ const Auth: NextPage<Props> = ({}) => {
                     data={{ ...signInRegister('email') }}
                   />
                   {signInErrors.email && (
-                    <span className='text-white text-sm absolute -bottom-[18px] left-0'>
+                    <span className='text-red-500 text-sm absolute -bottom-[18px] left-0'>
                       {signInErrors.email.message}
                     </span>
                   )}
@@ -197,7 +187,7 @@ const Auth: NextPage<Props> = ({}) => {
                     data={{ ...signInRegister('password') }}
                   />
                   {signInErrors.password && (
-                    <span className='text-white text-sm absolute -bottom-[18px] left-0'>
+                    <span className='text-red-500 text-sm absolute -bottom-[18px] left-0'>
                       {signInErrors.password.message}
                     </span>
                   )}
