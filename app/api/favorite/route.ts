@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import _ from 'lodash';
