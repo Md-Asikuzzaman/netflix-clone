@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
-import { prisma } from '@/lib/prisma';
+import { PrismaClient } from '@prisma/client';
+export const prisma = new PrismaClient();
 // check session existing...
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';

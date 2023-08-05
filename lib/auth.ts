@@ -1,6 +1,7 @@
 import { NextAuthOptions } from 'next-auth';
 
-import { prisma } from '@/lib/prisma';
+import { PrismaClient } from '@prisma/client';
+export const prisma = new PrismaClient();
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
 import CredentialsProvider from 'next-auth/providers/credentials';

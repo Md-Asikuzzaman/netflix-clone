@@ -3,7 +3,9 @@ import { getServerSession } from 'next-auth';
 import _ from 'lodash';
 
 import { authOptions } from '@/lib/auth';
-import { prisma } from '@/lib/prisma';
+
+import { PrismaClient } from '@prisma/client';
+export const prisma = new PrismaClient();
 
 export async function POST(request: Request) {
   const { movieId } = await request.json();
