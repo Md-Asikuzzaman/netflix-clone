@@ -40,7 +40,7 @@ export async function POST(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-  const { movieId } = await request.json();
+  const { movieId }: { movieId: string } = await request.json();
 
   try {
     const session = await getServerSession(authOptions);
