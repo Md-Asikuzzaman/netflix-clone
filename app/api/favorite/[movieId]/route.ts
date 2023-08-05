@@ -7,8 +7,11 @@ import { authOptions } from '@/lib/auth';
 import { PrismaClient } from '@prisma/client';
 export const prisma = new PrismaClient();
 
-export async function POST(request: NextRequest) {
-  const { movieId } = await request.json();
+export async function POST(
+  request: NextRequest,
+  { params }: { params: { movieId: string } }
+) {
+  const { movieId } = params;
   try {
     const session = await getServerSession(authOptions);
     if (!session) {
@@ -39,8 +42,11 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function DELETE(request: NextRequest) {
-  const { movieId } = await request.json();
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { movieId: string } }
+) {
+  const { movieId } = params;
 
   try {
     const session = await getServerSession(authOptions);
