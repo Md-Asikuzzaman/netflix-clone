@@ -25,11 +25,11 @@ const FavoriteButton: NextPage<Props> = ({ movieId }) => {
     let response;
 
     if (isFavorite) {
-      response = await axios.delete('http://localhost:3000/api/favorite', {
+      response = await axios.delete('/api/favorite', {
         data: { movieId },
       });
     } else {
-      response = await axios.post('http://localhost:3000/api/favorite', {
+      response = await axios.post('/api/favorite', {
         movieId,
       });
     }

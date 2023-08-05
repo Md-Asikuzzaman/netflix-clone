@@ -7,67 +7,67 @@ import { authOptions } from '@/lib/auth';
 import { PrismaClient } from '@prisma/client';
 export const prisma = new PrismaClient();
 
-export async function POST(request: Request) {
-  const { movieId }: { movieId: string } = await request.json();
-  try {
-    const session = await getServerSession(authOptions);
-    if (!session) {
-      return NextResponse.json('Unauthenticated!!!', { status: 500 });
-    }
+// export async function POST(request: Request) {
+//   const { movieId } = await request.json();
+//   try {
+//     const session = await getServerSession(authOptions);
+//     if (!session) {
+//       return NextResponse.json('Unauthenticated!!!', { status: 500 });
+//     }
 
-    const existingMovie = await prisma.movie.findUnique({
-      where: { id: movieId },
-    });
-    if (!existingMovie) {
-      return NextResponse.json('Invalid movie ID!', { status: 500 });
-    }
+//     const existingMovie = await prisma.movie.findUnique({
+//       where: { id: movieId },
+//     });
+//     if (!existingMovie) {
+//       return NextResponse.json('Invalid movie ID!', { status: 500 });
+//     }
 
-    const user = await prisma.user.update({
-      where: {
-        email: session.user.email,
-      },
-      data: {
-        favoriteIds: {
-          push: movieId,
-        },
-      },
-    });
+//     const user = await prisma.user.update({
+//       where: {
+//         email: session.user.email,
+//       },
+//       data: {
+//         favoriteIds: {
+//           push: movieId,
+//         },
+//       },
+//     });
 
-    return NextResponse.json(user, { status: 200 });
-  } catch (error) {
-    return NextResponse.json(error, { status: 500 });
-  }
-}
+//     return NextResponse.json(user, { status: 200 });
+//   } catch (error) {
+//     return NextResponse.json(error, { status: 500 });
+//   }
+// }
 
-export async function DELETE(request: Request) {
-  const { movieId }: { movieId: string } = await request.json();
+// export async function DELETE(request: Request) {
+//   const { movieId } = await request.json();
 
-  try {
-    const session = await getServerSession(authOptions);
-    if (!session) {
-      return NextResponse.json('Unauthenticated!!!', { status: 500 });
-    }
+//   try {
+//     const session = await getServerSession(authOptions);
+//     if (!session) {
+//       return NextResponse.json('Unauthenticated!!!', { status: 500 });
+//     }
 
-    const existingMovie = await prisma.movie.findUnique({
-      where: { id: movieId },
-    });
-    if (!existingMovie) {
-      return NextResponse.json('Invalid movie ID!', { status: 500 });
-    }
+//     const existingMovie = await prisma.movie.findUnique({
+//       where: { id: movieId },
+//     });
+//     if (!existingMovie) {
+//       return NextResponse.json('Invalid movie ID!', { status: 500 });
+//     }
 
-    const updatedFavoriteIds = _.without(session.user.favoriteIds, movieId);
+//     const updatedFavoriteIds = _.without(session.user.favoriteIds, movieId);
 
-    const updateUser = await prisma.user.update({
-      where: {
-        email: session.user.email,
-      },
-      data: {
-        favoriteIds: updatedFavoriteIds,
-      },
-    });
+//     const updateUser = await prisma.user.update({
+//       where: {
+//         email: session.user.email,
+//       },
+//       data: {
+//         favoriteIds: updatedFavoriteIds,
+//       },
+//     });
 
-    return NextResponse.json(updateUser, { status: 200 });
-  } catch (error) {
-    return NextResponse.json(error, { status: 500 });
-  }
-}
+//     return NextResponse.json(updateUser, { status: 200 });
+//   } catch (error) {
+//     return NextResponse.json(error, { status: 500 });
+//   }
+// }
