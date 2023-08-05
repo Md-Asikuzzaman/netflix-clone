@@ -8,7 +8,7 @@ import axios from 'axios';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
 
-import Input from '@/components/Input';
+import Input from './../../../components/Input';
 
 interface Props {}
 
