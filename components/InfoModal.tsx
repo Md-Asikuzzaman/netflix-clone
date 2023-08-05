@@ -65,6 +65,9 @@ const InfoModal: NextPage<Props> = ({ visible, onClose }) => {
               <AiOutlineClose className='text-white' size={20} />
             </div>
             <div className='absolute bottom-[10%] left-10'>
+              {isLoading && (
+                <div className='h-[40px] w-[400px] bg-zinc-800 mb-8 rounded-md'></div>
+              )}
               <p className='text-white text-3xl md:text-4xl h-full lg:text-5xl font-bold mb-8'>
                 {data?.title}
               </p>
@@ -77,9 +80,23 @@ const InfoModal: NextPage<Props> = ({ visible, onClose }) => {
 
           <div className='px-12 py-5'>
             <p className='text-green-400 font-semibold text-lg'>New</p>
-            <p className='text-white text-lg'>{data?.duration}</p>
-            <p className='text-white text-lg'>{data?.genre}</p>
-            <p className='text-white text-lg'>{data?.description}</p>
+            {isLoading ? (
+              <div className='h-[20px] w-[300px] bg-zinc-800 my-2 rounded-md'></div>
+            ) : (
+              <p className='text-white text-lg'>{data?.duration}</p>
+            )}
+
+            {isLoading ? (
+              <div className='h-[20px] w-[180px] bg-zinc-800 my-2 rounded-md'></div>
+            ) : (
+              <p className='text-white text-lg'>{data?.genre}</p>
+            )}
+
+            {isLoading ? (
+              <div className='h-[20px] w-full bg-zinc-800 mt-6 rounded-md'></div>
+            ) : (
+              <p className='text-white text-lg'>{data?.description}</p>
+            )}
           </div>
         </div>
       </div>
