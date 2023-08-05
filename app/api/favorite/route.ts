@@ -8,7 +8,7 @@ import { PrismaClient } from '@prisma/client';
 export const prisma = new PrismaClient();
 
 export async function POST(request: Request) {
-  const { movieId } = await request.json();
+  const { movieId } = (await request.json()) as any;
   try {
     const session = await getServerSession(authOptions);
     if (!session) {
