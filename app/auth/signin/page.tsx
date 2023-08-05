@@ -12,7 +12,39 @@ import Input from '@/components/Input';
 
 interface Props {}
 
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { signInFormSchema, signUpFormSchema } from '@/lib/FormValidation';
+
 const Auth: NextPage<Props> = ({}) => {
+  interface signUpFormData {
+    name: string;
+    email: string;
+    password: string;
+  }
+
+  interface signInFormData {
+    email: string;
+    password: string;
+  }
+
+  const {
+    register: signUpRegister,
+    handleSubmit: signUpHandleSubmit,
+    formState: { errors: registerErrors },
+  } = useForm<signUpFormData>({
+    resolver: zodResolver(signUpFormSchema),
+  });
+
+  const {
+    register: signInRegister,
+    handleSubmit: signInHandleSubmit,
+    formState: { errors: signInErrors },
+  } = useForm<signUpFormData>({
+    resolver: zodResolver(signInFormSchema),
+  });
+
+  // form validation end....
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,38 +57,49 @@ const Auth: NextPage<Props> = ({}) => {
     );
   }, []);
 
-  const login = useCallback(async () => {
-    try {
-      setEmail('');
-      setPassword('');
+  const handleLogin = useCallback(
+    async (data: signInFormData) => {
+      try {
+        const { email, password } = data;
 
-      await signIn('credentials', {
-        email,
-        password,
-        callbackUrl: '/profile',
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }, [email, password]);
+        await signIn('credentials', {
+          email,
+          password,
+          callbackUrl: '/profile',
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [email, password]
+  );
 
-  const register = useCallback(async () => {
-    try {
-      setName('');
-      setEmail('');
-      setPassword('');
+  const handleRegister = useCallback(
+    async (data: signUpFormData) => {
+      try {
+        const { name, email, password } = data;
 
-      await axios.post('http://localhost:3000/api/register', {
-        email,
-        name,
-        password,
-      });
+        await axios.post('http://localhost:3000/api/register', {
+          email,
+          name,
+          password,
+        });
 
-      login();
-    } catch (error) {
-      console.log(error);
-    }
-  }, [name, email, password, login]);
+        handleLogin(data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [name, email, password]
+  );
+
+  const submitSignUpData = (data: signUpFormData) => {
+    handleRegister(data);
+  };
+
+  const submitSignInData = (data: signInFormData) => {
+    handleLogin(data);
+  };
 
   return (
     <div className="relative h-screen w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-cover bg-fixed">
@@ -65,41 +108,110 @@ const Auth: NextPage<Props> = ({}) => {
           <img src='/images/logo.png' alt='logo' className='h-12' />
         </nav>
         <div className='flex justify-center'>
-          <div className='bg-black bg-opacity-70 self-center px-16 py-16 mt-2 lg:w-2/5 lg:max-w-lg rounded-md w-full'>
+          <div className='bg-black bg-opacity-70 self-center px-16 py-14 mt-2 lg:w-2/5 lg:max-w-lg rounded-md w-full'>
             <h2 className='text-white text-4xl mb-8 font-semibold'>
               {variant === 'login' ? 'Sign in' : 'Sign up'}
             </h2>
-            <div className='flex flex-col gap-4'>
-              {variant === 'register' && (
-                <Input
-                  id='name'
-                  label='Username'
-                  type='string'
-                  value={name}
-                  onChange={(e: any) => setName(e.target.value)}
-                />
-              )}
-              <Input
-                id='email'
-                label='Email'
-                type='string'
-                value={email}
-                onChange={(e: any) => setEmail(e.target.value)}
-              />
-              <Input
-                id='password'
-                label='Password'
-                type='password'
-                value={password}
-                onChange={(e: any) => setPassword(e.target.value)}
-              />
-            </div>
-            <button
-              onClick={variant === 'login' ? login : register}
-              className='bg-red-600 text-white w-full py-3 text-md rounded-md mt-10 hover:bg-red-700 transition'
-            >
-              {variant === 'login' ? 'Login' : 'Register'}
-            </button>
+
+            {/* start the form */}
+
+            {variant === 'register' ? (
+              <form
+                onSubmit={signUpHandleSubmit(submitSignUpData)}
+                className='flex flex-col gap-6'
+              >
+                <div className='relative'>
+                  <Input
+                    id='name'
+                    label='Username'
+                    type='string'
+                    data={{ ...signUpRegister('name') }}
+                  />
+
+                  {registerErrors.name && (
+                    <span className='text-white text-sm absolute -bottom-[18px] left-0'>
+                      {registerErrors.name.message}
+                    </span>
+                  )}
+                </div>
+
+                <div className='relative'>
+                  <Input
+                    id='email'
+                    label='Email'
+                    type='string'
+                    data={{ ...signUpRegister('email') }}
+                  />
+
+                  {registerErrors.email && (
+                    <span className='text-white text-sm absolute -bottom-[18px] left-0'>
+                      {registerErrors.email.message}
+                    </span>
+                  )}
+                </div>
+
+                <div className='relative'>
+                  <Input
+                    id='password'
+                    label='Password'
+                    type='password'
+                    data={{ ...signUpRegister('password') }}
+                  />
+
+                  {registerErrors.password && (
+                    <span className='text-white text-sm absolute -bottom-[18px] left-0'>
+                      {registerErrors.password.message}
+                    </span>
+                  )}
+                </div>
+                <button
+                  type='submit'
+                  className='bg-red-600 text-white w-full py-3 text-md rounded-md mt-8 hover:bg-red-700 transition'
+                >
+                  Register
+                </button>
+              </form>
+            ) : (
+              <form
+                onSubmit={signInHandleSubmit(submitSignInData)}
+                className='flex flex-col gap-6'
+              >
+                <div className='relative'>
+                  <Input
+                    id='email'
+                    label='Email'
+                    type='string'
+                    data={{ ...signInRegister('email') }}
+                  />
+                  {signInErrors.email && (
+                    <span className='text-white text-sm absolute -bottom-[18px] left-0'>
+                      {signInErrors.email.message}
+                    </span>
+                  )}
+                </div>
+                <div className='relative'>
+                  <Input
+                    id='password'
+                    label='Password'
+                    type='password'
+                    data={{ ...signInRegister('password') }}
+                  />
+                  {signInErrors.password && (
+                    <span className='text-white text-sm absolute -bottom-[18px] left-0'>
+                      {signInErrors.password.message}
+                    </span>
+                  )}
+                </div>
+                <button
+                  type='submit'
+                  className='bg-red-600 text-white w-full py-3 text-md rounded-md mt-8 hover:bg-red-700 transition'
+                >
+                  Login
+                </button>
+              </form>
+            )}
+
+            {/* end the form */}
             <div className='flex items-center gap-4 mt-8 justify-center'>
               <div
                 onClick={() =>

@@ -2,21 +2,19 @@ import { NextPage } from 'next';
 
 interface Props {
   id: string;
-  onChange: any;
-  value: string;
   label: string;
   type?: string;
+  data: any;
 }
 
-const Input: NextPage<Props> = ({ id, onChange, value, label, type }) => {
+const Input: NextPage<Props> = ({ id, label, type, data }) => {
   return (
     <div className='relative'>
       <input
         type={type}
         id={id}
+        {...data}
         placeholder=' '
-        value={value}
-        onChange={onChange}
         className='
         block
         rounded-md
