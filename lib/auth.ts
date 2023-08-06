@@ -38,7 +38,7 @@ export const authOptions: NextAuthOptions = {
         }
 
         const res = await axios.post(
-          'http://localhost:3000/api/login',
+          'https://netflix-clone-md-asikuzzaman.vercel.app/api/login',
           {
             email: credentials.email,
             password: credentials.password,
