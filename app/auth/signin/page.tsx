@@ -67,21 +67,24 @@ const Auth: NextPage<Props> = ({}) => {
     }
   }, []);
 
-  const handleRegister = useCallback(async (data: signUpFormData) => {
-    try {
-      const { name, email, password } = data;
+  const handleRegister = useCallback(
+    async (data: signUpFormData) => {
+      try {
+        const { name, email, password } = data;
 
-      await axios.post('http://localhost:3000/api/register', {
-        email,
-        name,
-        password,
-      });
+        await axios.post('http://localhost:3000/api/register', {
+          email,
+          name,
+          password,
+        });
 
-      handleLogin(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+        handleLogin(data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [handleLogin]
+  );
 
   const submitSignUpData = (data: signUpFormData) => {
     handleRegister(data);

@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
 // check session existing...
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { prisma } from '@/lib/db';
 
 // Crate a New Post
 export async function POST(request: Request) {
