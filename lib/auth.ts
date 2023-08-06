@@ -37,10 +37,13 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Email and Password required!');
         }
 
-        const res = await axios.post('http://localhost:3000/api/login', {
-          email: credentials.email,
-          password: credentials.password,
-        });
+        const res = await axios.post(
+          'https://devasik-netflix-clone.vercel.app/api/login',
+          {
+            email: credentials.email,
+            password: credentials.password,
+          }
+        );
 
         const user = await res.data;
 
