@@ -4,7 +4,7 @@
 
 This is a repository for a FullStack Netflix Clone tutorial using React, NextJS, TailwindCSS & Prisma.
 
-[LIVE DEMO](https://netflix-clone-git-main-md-asikuzzaman.vercel.app)
+[LIVE DEMO](https://netflix-clone-md-asikuzzaman.vercel.app)
 
 Features:
 
