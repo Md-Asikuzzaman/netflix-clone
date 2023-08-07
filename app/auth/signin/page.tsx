@@ -73,7 +73,7 @@ const Auth: NextPage<Props> = ({}) => {
         const { name, email, password } = data;
 
         await axios.post(
-          'netflix-clone-md-asikuzzaman.vercel.app/api/register',
+          'https://netflix-clone-md-asikuzzaman.vercel.app/api/register',
           {
             email,
             name,

@@ -26,11 +26,11 @@ const FavoriteButton: NextPage<Props> = ({ movieId }) => {
 
     if (isFavorite) {
       response = await axios.delete(
-        `netflix-clone-md-asikuzzaman.vercel.app/api/favorite/${movieId}`
+        `https://netflix-clone-md-asikuzzaman.vercel.app/api/favorite/${movieId}`
       );
     } else {
       response = await axios.post(
-        `netflix-clone-md-asikuzzaman.vercel.app/api/favorite/${movieId}`
+        `https://netflix-clone-md-asikuzzaman.vercel.app/api/favorite/${movieId}`
       );
     }
 
