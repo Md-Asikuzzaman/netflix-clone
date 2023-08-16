@@ -101,7 +101,7 @@ const Auth: NextPage<Props> = ({}) => {
           <Image height={48} width={140} src='/images/logo.png' alt='logo' />
         </nav>
         <div className='flex justify-center'>
-          <div className='bg-black bg-opacity-70 self-center px-16 py-14 mt-2 lg:w-2/5 lg:max-w-lg rounded-md w-full'>
+          <div className='bg-black bg-opacity-70 self-center px-6 md:px-16 py-14 mt-2 lg:w-2/5 lg:max-w-lg rounded-md w-full'>
             <h2 className='text-white text-4xl mb-8 font-semibold'>
               {variant === 'login' ? 'Sign in' : 'Sign up'}
             </h2>
