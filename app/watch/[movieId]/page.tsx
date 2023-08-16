@@ -25,7 +25,7 @@ const Watch: NextPage<Props> = ({ params }) => {
     if (error) {
       router.replace('/');
     }
-  }, [error]);
+  }, [error, router]);
 
   return (
     <div className='h-screen w-screen bg-black'>

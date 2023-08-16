@@ -15,6 +15,7 @@ interface Props {}
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signInFormSchema, signUpFormSchema } from '@/lib/FormValidation';
+import Image from 'next/image';
 
 const Auth: NextPage<Props> = ({}) => {
   interface signUpFormData {
@@ -56,7 +57,6 @@ const Auth: NextPage<Props> = ({}) => {
   const handleLogin = useCallback(async (data: signInFormData) => {
     try {
       const { email, password } = data;
-
       await signIn('credentials', {
         email,
         password,
@@ -72,14 +72,11 @@ const Auth: NextPage<Props> = ({}) => {
       try {
         const { name, email, password } = data;
 
-        await axios.post(
-          'https://netflix-clone-md-asikuzzaman.vercel.app/api/register',
-          {
-            email,
-            name,
-            password,
-          }
-        );
+        await axios.post(`/api/register`, {
+          email,
+          name,
+          password,
+        });
 
         handleLogin(data);
       } catch (error) {
@@ -101,7 +98,7 @@ const Auth: NextPage<Props> = ({}) => {
     <div className="relative h-screen w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-cover bg-fixed">
       <div className='bg-black h-full w-full lg:bg-opacity-50'>
         <nav className='px-12 py-5'>
-          <img src='/images/logo.png' alt='logo' className='h-12' />
+          <Image height={48} width={140} src='/images/logo.png' alt='logo' />
         </nav>
         <div className='flex justify-center'>
           <div className='bg-black bg-opacity-70 self-center px-16 py-14 mt-2 lg:w-2/5 lg:max-w-lg rounded-md w-full'>

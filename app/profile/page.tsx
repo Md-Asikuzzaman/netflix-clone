@@ -3,6 +3,7 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 interface Props {}
 
@@ -20,8 +21,13 @@ const Page: NextPage<Props> = ({}) => {
         <div className='flex items-center justify-center gap-8 mt-10'>
           <div onClick={() => router.replace('/')}>
             <div className='group flex-row w-44 mx-auto'>
-              <div className='w-40 h-40 rounded-md items-center justify-center border-2 border-transparent group-hover:cursor-pointer group-hover:border-white overflow-hidden'>
-                <img src='/images/default-green.png' alt='Profile' />
+              <div className='relative w-40 h-40 rounded-md items-center justify-center border-2 border-transparent group-hover:cursor-pointer group-hover:border-white overflow-hidden'>
+                <Image
+                  fill
+                  style={{ objectFit: 'contain' }}
+                  src='/images/default-green.png'
+                  alt='Profile'
+                />
               </div>
               <div className='mt-4 text-neutral-400 text-center group-hover:text-white'>
                 {session?.user?.name}

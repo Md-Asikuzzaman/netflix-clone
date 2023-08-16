@@ -3,6 +3,7 @@
 import { NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import { signOut } from 'next-auth/react';
+import Image from 'next/image';
 
 interface Props {
   visible?: boolean;
@@ -20,17 +21,23 @@ const AccountMenu: NextPage<Props> = ({ visible }) => {
       <div className='flex flex-col gap-3'>
         <div className='group/item px-3 flex flex-row gap-3 items-center w-full'>
           {session?.user.image ? (
-            <img
-              className='w-8 rounded-md'
-              src={session.user.image}
-              alt='avatar'
-            />
+            <div className='relative w-8 h-8'>
+              <Image
+                fill
+                className='rounded-md'
+                src={session.user.image}
+                alt='avatar'
+              />
+            </div>
           ) : (
-            <img
-              className='w-8 rounded-md'
-              src='/images/default-blue.png'
-              alt='avatar'
-            />
+            <div className='relative w-8 h-8'>
+              <Image
+                fill
+                className='rounded-md'
+                src='/images/default-blue.png'
+                alt='avatar'
+              />
+            </div>
           )}
 
           <p className='text-white text-sm group-hover/item:underline'>

@@ -25,13 +25,9 @@ const FavoriteButton: NextPage<Props> = ({ movieId }) => {
     let response;
 
     if (isFavorite) {
-      response = await axios.delete(
-        `https://netflix-clone-md-asikuzzaman.vercel.app/api/favorite/${movieId}`
-      );
+      response = await axios.delete(`/api/favorite/${movieId}`);
     } else {
-      response = await axios.post(
-        `https://netflix-clone-md-asikuzzaman.vercel.app/api/favorite/${movieId}`
-      );
+      response = await axios.post(`/api/favorite/${movieId}`);
     }
 
     const updatedFavoriteIds = response?.data?.favoriteIds;
@@ -44,7 +40,7 @@ const FavoriteButton: NextPage<Props> = ({ movieId }) => {
       },
     });
     mutateFavorites();
-  }, [movieId, isFavorite, session, mutateFavorites]);
+  }, [movieId, isFavorite, session, mutateFavorites, update]);
 
   const Icon = isFavorite ? AiOutlineCheck : AiOutlinePlus;
 

@@ -25,6 +25,7 @@ export const authOptions: NextAuthOptions = {
         email: {
           label: 'Email',
           type: 'text',
+          placeholder: 'Enter email',
         },
         password: {
           label: 'Password',
@@ -37,13 +38,10 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Email and Password required!');
         }
 
-        const res = await axios.post(
-          'https://netflix-clone-md-asikuzzaman.vercel.app/api/login',
-          {
-            email: credentials.email,
-            password: credentials.password,
-          }
-        );
+        const res = await axios.post(`${process.env.NEXTAUTH_URL}/api/login`, {
+          email: credentials.email,
+          password: credentials.password,
+        });
 
         const user = await res.data;
 

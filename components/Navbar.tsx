@@ -6,6 +6,7 @@ import { BsBell, BsChevronDown, BsSearch } from 'react-icons/bs';
 import NavbarItem from './NavbarItem';
 import MobileMenu from './MobileMenu';
 import AccountMenu from './AccountMenu';
+import Image from 'next/image';
 
 const TOP_OFFSET = 66;
 
@@ -35,12 +36,12 @@ const Navbar: NextPage<Props> = ({}) => {
   const toggleMobileMenu = useCallback(() => {
     setShowMobileMenu((prev) => !prev);
     setShowAccountMenu(false);
-  }, [showMobileMenu]);
+  }, []);
 
   const toggleAccountMenu = useCallback(() => {
     setShowAccountMenu((prev) => !prev);
     setShowMobileMenu(false);
-  }, [showAccountMenu]);
+  }, []);
 
   return (
     <nav className='w-full fixed z-30'>
@@ -57,7 +58,9 @@ const Navbar: NextPage<Props> = ({}) => {
         ${showBackground ? 'bg-zinc-900 bg-opacity-90' : ''}
         `}
       >
-        <img className='h-4 lg:h-7' src='/images/logo.png' alt='Logo' />
+        <div className='relative h-4 w-20 lg:h-7 lg:w-24'>
+          <Image fill src='/images/logo.png' alt='Logo' />
+        </div>
         <div
           className='
             flex-row
@@ -98,12 +101,8 @@ const Navbar: NextPage<Props> = ({}) => {
             onClick={toggleAccountMenu}
             className='flex flex-row items-center gap-2 cursor-pointer relative'
           >
-            <div className='w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden'>
-              <img
-                className='w-fll h-full bg-cover'
-                src='/images/default-green.png'
-                alt='avatar'
-              />
+            <div className='relative w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden'>
+              <Image fill src='/images/default-green.png' alt='avatar' />
             </div>
             <BsChevronDown
               className={`text-white transition ${

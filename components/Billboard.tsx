@@ -16,7 +16,7 @@ const Billboard: NextPage<Props> = ({}) => {
 
   const handleOpenModal = useCallback(() => {
     openModal(data?.id);
-  }, [data]);
+  }, [data, openModal]);
 
   return (
     <div className='relative h-[200px] md:h-[380px] lg:h-[500px] overflow-hidden'>
