@@ -1,14 +1,15 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 
-import './globals.css';
-import Provider from '@/components/Provider';
+import "./globals.css";
+import Provider from "@/components/Provider";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Netflix Clone',
-  description: 'Netflix Clone | Developed by dev Asik',
+  title: "Netflix Clone",
+  description: "Netflix Clone | Developed by dev Asik",
 };
 
 export default function RootLayout({
@@ -17,10 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
+    <html lang="en">
       <Provider>
         <body className={inter.className} suppressHydrationWarning={true}>
-          {children}
+          <ReactQueryProvider>{children}</ReactQueryProvider>
         </body>
       </Provider>
     </html>
